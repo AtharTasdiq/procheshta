@@ -22,9 +22,10 @@ const Home = () => {
     // slicing uptp 3 and storing in array
     const upcomingCampaigns = campaigns.filter(campaign => campaign.status === "upcoming").slice(0,3);
     //console.log(upcomingCampaigns);
+    const volunteer=true;
     
     return (
-        <div>
+        <div style={{backgroundColor:"#b6edf8"}}>
             <Slider></Slider>
             <Container>
             <div className="text-center">
@@ -57,7 +58,7 @@ const Home = () => {
 
             </Container>
             <WhatWeDo></WhatWeDo>
-            <CallToAction></CallToAction>
+            <CallToAction volunteer={volunteer}></CallToAction>
             <PreviousCampaigns campaigns={campaigns}></PreviousCampaigns>
             <TopArticles/>
             <Footer/>

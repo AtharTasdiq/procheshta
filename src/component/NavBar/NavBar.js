@@ -19,13 +19,12 @@ const NavBar = () => {
                     >
                     </Nav>
 
-                    <NavLink className="mx-2 text-light text-decoration-none fs-5" to="/">Home</NavLink>
-                        <NavLink className="mx-2 text-light text-decoration-none fs-5" to="/dashboard">Dashboard</NavLink>
-                        <NavLink className="mx-2 text-light text-decoration-none fs-5" to="/about-us">About Us</NavLink>
-                        <NavLink className="mx-2 text-light text-decoration-none fs-5" to="/campaigns">Campaigns</NavLink>
-                        <NavLink className="mx-2 text-light text-decoration-none fs-5" to="/donation">Donate Now!</NavLink>
-                        <NavLink className="mx-2 text-light text-decoration-none fs-5" to="/contact">Contact</NavLink>
-
+                        <NavLink className="mx-2 text-light text-decoration-none fs-5 navlinks" to="/">Home</NavLink>
+                        <NavLink className="mx-2 text-light text-decoration-none fs-5 navlinks" to="/dashboard">Dashboard</NavLink>
+                        <NavLink className="mx-2 text-light text-decoration-none fs-5 navlinks" to="/about-us">About Us</NavLink>
+                        <NavLink className="mx-2 text-light text-decoration-none fs-5 navlinks" to="/campaigns">Campaigns</NavLink>
+                        <NavLink className="mx-2 text-light text-decoration-none fs-5 navlinks" to="/donation">Donate Now!</NavLink>
+                        <NavLink className="mx-2 text-light text-decoration-none fs-5 navlinks" to="/contact">Contact</NavLink>
                         <NavLink className="mx-2 btn btn btn-light" to="/login">Login</NavLink>
                     
                     </Navbar.Collapse>

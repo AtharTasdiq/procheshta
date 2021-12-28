@@ -16,7 +16,7 @@ const WhatWeDo = () => {
                         platform, Procheshta members join our volunteer, 
                         social change, and civic action campaigns to make 
                         real-world impact on causes they care about  
-                         <Link to="/about-us">Visit Our Team</Link>.</p>
+                         <Link className='ps-2' to="/about-us">Visit Our Team</Link>.</p>
                 </div>
                 <Row xs={1} lg={2} md={2} sm={1} className="g-5 mx-3">
                     <Col>

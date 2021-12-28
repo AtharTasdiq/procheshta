@@ -7,15 +7,26 @@ import AboutUs from "./component/AboutUs/AboutUs";
 import Contact from "./component/Contact/Contact";
 import Login from "./component/Login/Login";
 import NavBar from './component/NavBar/NavBar';
+import { createContext } from 'react';
+import { useState } from 'react';
+
 
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
+import SingleCampaign from './component/SingleCampaign/SingleCampaign';
+
+export const UserContext = createContext();
+
 
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState({});
+  const [buyService, setbuyService] = useState({});
   return (
+
+    <UserContext.Provider value = {{value :[loggedInUser, setLoggedInUser], value2 :[buyService, setbuyService]}}>
     <Router>
       <NavBar></NavBar>
       <Switch>
@@ -31,6 +42,9 @@ function App() {
           <Route exact path="/campaigns">
             <Campaigns></Campaigns>
           </Route>
+          <Route exact path="/campaigns/:key">
+            <SingleCampaign></SingleCampaign>
+          </Route>
           <Route exact path="/donation">
             <Donation></Donation>
           </Route>
@@ -40,11 +54,13 @@ function App() {
           <Route exact path="/contact">
             <Contact></Contact>
           </Route>
-          <Route exact path="/login">
+          {/* <Route exact path="/login">
             <Login></Login>
-          </Route>
+          </Route> */}
       </Switch>
     </Router>
+  </UserContext.Provider>
+
   );
 }
 
