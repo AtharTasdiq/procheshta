@@ -5,6 +5,12 @@ import { NavLink } from 'react-router-dom';
 import logo from "../../images/logo1.png";
 
 const NavBar = () => {
+    const user = sessionStorage.getItem("token");
+    const handlelogout = () =>{
+        sessionStorage.setItem("token", "")
+        window.location.reload();
+    }
+    
     return (
         <div>
             <Navbar bg="dark" expand="lg">
@@ -25,7 +31,10 @@ const NavBar = () => {
                         <NavLink className="mx-2 text-light text-decoration-none fs-5 navlinks" to="/campaigns">Campaigns</NavLink>
                         <NavLink className="mx-2 text-light text-decoration-none fs-5 navlinks" to="/donation">Donate Now!</NavLink>
                         <NavLink className="mx-2 text-light text-decoration-none fs-5 navlinks" to="/contact">Contact</NavLink>
-                        <NavLink className="mx-2 btn btn btn-light" to="/login">Login</NavLink>
+                        {
+                            user?<NavLink onClick={handlelogout} className="mx-2 btn btn btn-light" to="/login">Log Out</NavLink>:<NavLink className="mx-2 btn btn btn-light" to="/login">Login</NavLink>
+                        }
+                        
                     
                     </Navbar.Collapse>
                 </Container>

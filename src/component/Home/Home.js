@@ -15,12 +15,12 @@ const Home = () => {
     // calling hooks for storing feching data
     const [campaigns, setCampaigns]= useState([]);
     useEffect(() => {
-        fetch("./demoData.json")
+        fetch("https://shielded-peak-65069.herokuapp.com/showcampaigns")
         .then(res=>res.json())
         .then(data=>setCampaigns(data))
     },[]);
     // slicing uptp 3 and storing in array
-    const upcomingCampaigns = campaigns.filter(campaign => campaign.status === "upcoming").slice(0,3);
+    const upcomingCampaigns = campaigns.filter(campaign => campaign.Status === "Upcoming").slice(0,3);
     //console.log(upcomingCampaigns);
     const volunteer=true;
     
@@ -33,16 +33,16 @@ const Home = () => {
             </div>
             <Row xs={1} lg={3} md={2} sm={1} className="g-5 mx-3">
                         {upcomingCampaigns.map( campaign => (
-                            <Col key={campaign.key} >
+                            <Col key={campaign._id} >
                                 <Card className="card-design">
-                                    <Card.Img className="w-100 mx-auto p-3" variant="top" src={campaign.campaignImg} />
+                                    <Card.Img className="w-100 mx-auto p-3" variant="top" src={campaign.imageURL} />
                                     <Card.Body>
-                                    <Card.Title className="fs-2 title-design fw-bolder">{campaign.title}</Card.Title>
-                                    <Card.Text>Posted by <span className="fw-bolder creator-name">{campaign.creatorName}</span></Card.Text>
+                                    <Card.Title className="fs-2 title-design fw-bolder">{campaign.Title}</Card.Title>
+                                    <Card.Text>Posted by <span className="fw-bolder creator-name">{campaign.Name}</span></Card.Text>
                                     <Card.Text>
-                                        {campaign.description.slice(0,150)}....
+                                        {campaign.Description.slice(0,150)}....
                                     </Card.Text>
-                                    <Link to={`/campaigns/${campaign.key}`} className="text-center">
+                                    <Link to={`/campaigns/${campaign._id}`} className="text-center">
                                          <Button className="btn text-light mx-auto fw-bolder campaign-button">Join Campaign</Button>
                                     </Link>    
                                     </Card.Body>

@@ -20,32 +20,32 @@ const Footer = () => {
                 <div className="col-md-3 mb-md-0 mb-3">
                     <h5 className="links-title-design">Main</h5>
                     <ul className="list-unstyled">
-                        <li><a className="text-dark" href="#!">Home</a></li>
-                        <li><a className="text-dark" href="#!">Dashboard</a></li>
-                        <li><a className="text-dark" href="#!">Campaigns</a></li>
+                        <li><a className="text-dark text-decoration-none" href="/">Home</a></li>
+                        <li><a className="text-dark text-decoration-none" href="/dashboard">Dashboard</a></li>
+                        <li><a className="text-dark text-decoration-none" href="/campaigns">Campaigns</a></li>
                     </ul>
                 </div>
 
                 <div className="col-md-2 mb-md-0 mb-3">
-                    <h5 className="links-title-design">Links</h5>
+                    <h5 className="links-title-design">Inner Pages</h5>
                     <ul className="list-unstyled">
-                        <li><a className="text-dark" href="#!">About Us</a></li>
-                        <li><a className="text-dark" href="#!">Contact</a></li>
+                        <li><a className="text-dark text-decoration-none" href="/about-us">About Us</a></li>
+                        <li><a className="text-dark text-decoration-none" href="/contact">Contact</a></li>
                     </ul>
                 </div>
 
                 <div className="col-md-3 mb-md-0 mb-3">
-                    <h5 className="links-title-design">Links</h5>
+                    <h5 className="links-title-design">Others</h5>
                     <ul className="list-unstyled">
-                        <li><a className="text-dark" href="#!">Sign In</a></li>
-                        <li><a className="text-dark" href="#!">Register Now</a></li>
-                        <li><a className="text-dark" href="#!">Donate!</a></li>
+                        <li><a className="text-dark text-decoration-none" href="/login">Sign In</a></li>
+                        <li><a className="text-dark text-decoration-none" href="login">Register Now</a></li>
+                        <li><a className="text-dark text-decoration-none" href="/donation">Donate!</a></li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div className="footer-copyright text-light text-center py-3">© 2021 Copyright: Procheshta
+        <div className="footer-copyright text-light text-center py-3">© 2022 Copyright: <b>Procheshta</b>
         </div>
         </Container>
 

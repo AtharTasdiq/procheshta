@@ -8,8 +8,33 @@ import Footer from '../Footer/Footer';
 
 const Donation = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+    const onSubmit = data => {
 
+        const productData = {
+            Name: data.Name,
+            Email: data.Email,
+            Phone: data.Phone,
+            Amount: data.Amount,
+            TrxID: data.TrxID,  
+        };
+        document.getElementById("Name").value="";
+        document.getElementById("Email").value="";
+        document.getElementById("Phone").value="";
+        document.getElementById("Amount").value="";
+        document.getElementById("TrxID").value="";
+
+
+        const url = `https://shielded-peak-65069.herokuapp.com/givedonation`;
+
+        fetch(url,{
+          method:"POST",
+          headers:{
+              "Content-Type":"application/json"
+          },
+          body: JSON.stringify(productData)
+        })
+        alert("Thanks For The Donation!");
+       };
     return (
     <div style={{backgroundColor:"#b6edf8"}}>
         <Container>
@@ -21,18 +46,17 @@ const Donation = () => {
                     <Col className='text-center'>
                         <div className='donation-form'>
                             <form className='div-design p-5' onSubmit={handleSubmit(onSubmit)}>
-                                <label for="name">Name</label>
-                                <input className="input-design" placeholder="Enter Name" type={"text"} {...register("example", { required: true })} /><br/>
-                                <label for="name">Email</label>
-                                <input className="input-design" placeholder="Enter Email" type={"email"} {...register("example", { required: true })} /><br/>
-                                <label for="name">Phone</label>
-                                <input className="input-design" placeholder="Enter Phone Number" type={"text"} {...register("example", { required: true })} /><br/>
-                                <label for="name">Amount</label>
-                                <input className="input-design" placeholder="Enter Your Amount" type={"text"} {...register("example", { required: true })} /><br/>
-                                <label for="name">TrxID</label>
-                                <input className="input-design" placeholder="Enter Bkash TrxID" type={"text"} {...register("example", { required: true })} /><br/>
-                                {errors.exampleRequired && <span>This field is required</span>}
-                                <input className="mt-3 btn btn-outline-dark" type="submit" />
+                                <input className="input-design" name="Name" placeholder="Enter Name" id="Name" {...register('Name', { required: true})}/>
+                                    <br></br>
+                                <input className="input-design" name="Email" placeholder="Email" type="email" id="Email" {...register('Email', { required: true})}/>
+                                    <br></br>
+                                <input className="input-design" name="Phone" placeholder="Phone" id="Phone" {...register('Phone', { required: true})}/>
+                                    <br></br>
+                                <input className="input-design" name="Amount" placeholder="Amount" id="Amount" {...register('Amount', { required: true})}/>
+                                    <br></br>
+                                <input className="input-design" name="TrxID" placeholder="TrxID" id="TrxID" {...register('TrxID', { required: true})}/>
+                                    <br></br>
+                                <input className="mt-4 btn btn-outline-dark" id="submit_btn" type="submit" />
                             </form>
                         </div>
                     </Col>
@@ -53,32 +77,28 @@ const Donation = () => {
                         <Accordion.Item eventKey="0">
                             <Accordion.Header>This Helps Us To Buy Foods For The Helpless People</Accordion.Header>
                                 <Accordion.Body>
-                                We host various type of civic campaigns for the sake of human kind. We beleive in 
-                                loving, respecting and helping people. Every lives matter!Awareness campaigns are often
-                                 the first step to introduce the audience to new services, programmes, facilities or actions. It is aimed at 
-                                 building familiarity to a desirable behavior, say, promoting immunization or improving public health.
+                                We are asking you to donate us ৳100 to help buying a food parcel for one homeless person everyday.
+                                 It's our little initiative for feeding one person daily. Also a “ food for everyone" campaign aimed 
+                                 at feeding homeless people  during this lockdown, is coming at 21 January, 2022. It's focusing on those
+                                  people who are suffering and starving the most in this lockdown.
                                 </Accordion.Body>
                         </Accordion.Item>
                         <Accordion.Item eventKey="1">
                             <Accordion.Header>We Make Shelters For The Homeless People</Accordion.Header>
                                 <Accordion.Body>
-                                The knowledge that you’re helping others is hugely empowering and, 
-                                in turn, can make you feel happier and more fulfilled. Research has 
-                                identified a link between making a donation to charity and increased
-                                 activity in the area of the brain that registers pleasure - proving 
-                                 that as the old adage goes, it really is far better to give than to 
-                                 receive.
+                                One of the great problems of the 21st century is the exponential increase of the homeless. Those strange
+                                 beings who daily grow in our streets as if they were weeds. We cannot not solve the problem of homelessness, 
+                                 but we can try to give a little to those who think they've no home. When you contribute some it makes a whole
+                                  for them. We try to make temporary shelter for those poeple for being safe and sound.
                                 </Accordion.Body>
                         </Accordion.Item>
                         <Accordion.Item eventKey="2">
                             <Accordion.Header>A Big Part Of Our Donation Goes For The Education</Accordion.Header>
                                 <Accordion.Body>
-                                wareness matters because it can help to improve the 
-                                lives of patients. Knowledge is a powerful tool. It 
-                                causes people to take action that can improve treatments, 
-                                diagnostics, and social supports. Increased understanding 
-                                about chronic conditions in the community can have three 
-                                powerful effects.
+                                35% of our total donation goes to the education fund. Education is one of our basic need. You can help us to 
+                                provide help all the kids country-wide to build a strong foundation for their future. Imagine life without the
+                                 ability to read or do basic math. For 56% of elementary-aged children around the world who don't meet minimum 
+                                 reading proficiency standards.Togather we can do something better for brightening their future.
                                 </Accordion.Body>
                         </Accordion.Item>
                         

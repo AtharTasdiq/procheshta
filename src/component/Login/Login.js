@@ -1,101 +1,200 @@
-import React, { useState } from 'react';
-import './Login.css';
-import useAuth from '../../hooks/useAuth';
+import React, { useContext, useState } from 'react';
+import firebase from "firebase/app";
+import "firebase/auth";
+import firebaseConfig from './firebase.config';
+import "./Login.css";
+import { UserContext } from '../../App';
+import { useHistory, useLocation } from 'react-router';
+
+
+firebase.initializeApp(firebaseConfig)
 
 const Login = () => {
+    const [user, setUser] = useState({
+        isSignedIn: false,
+        name: '',
+        email:'',
+        photo: ''
+      });
 
-    const [toggle, setToggle] = useState(false);
-    const { userWithEmailandPassword, setEmail,
-        setPassword, signWithEmailandPassword, user, error, setName } = useAuth();
+      const handlelogin=()=>{
+        window.location.reload();
+    }
 
-    const handleNameChange = (e) => {
-        setName(e.target.value);
-    };
+      //const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+      const { value, value2 } = React.useContext(UserContext);
+      const [loggedInUser, setLoggedInUser] = value;
+      const [buyService, setbuyService] = value2;
 
-    const toggleLogin = (e) => {
-        setToggle(e.target.checked);
-        console.log(e.target.value);
-    };
+    const history = useHistory();
+    const location = useLocation();
+    // let { from } = location.state || { from: { pathname: "/" } };
+    let { from } = { from: { pathname: "/" } };
+    
+    const provider = new firebase.auth.GoogleAuthProvider();
 
-    const email = (e) => {
-        setEmail(e.target.value);
-    };
-    const password = (e) => {
-        setPassword(e.target.value);
-    };
 
+      const handleSignIn = () =>{
+        firebase.auth().signInWithPopup(provider)
+        .then(res => {
+          const {displayName, photoURL, email} = res.user;
+          const signedInUser = {
+            isSignedIn: true,
+            name: displayName,
+            email: email,
+            photo: photoURL
+          }
+          setUser(signedInUser);
+          setLoggedInUser(signedInUser);
+          sessionStorage.setItem("token", signedInUser.email,signedInUser.name)
+          history.replace(from);
+          // console.log(displayName, email, photoURL);
+          handlelogin();
+        })
+        .catch(err => {
+          console.log(err);
+          console.log(err.message);
+        })
+      }
+    
+      const handleSignOut = () => {
+        firebase.auth().signOut()
+        .then(res => {
+          const signedOutUser = {
+            isSignedIn: false, 
+            name: '',
+            photo:'',
+            email:'',
+            password:'',
+            error:'',
+            isValid:false,
+            existingUser: false
+          }
+          setUser(signedOutUser);
+          console.log(res);
+        })
+        .catch( err => {
+    
+        })
+      }
+    
+      const is_valid_email = email =>  /(.+)@(.+){2,}\.(.+){2,}/.test(email); 
+      const hasNumber = input => /\d/.test(input);
+      
+      const switchForm = e =>{
+        const createdUser = {...user};
+        createdUser.existingUser = e.target.checked;
+        setUser(createdUser);
+      }
+      const handleChange = e =>{
+        const newUserInfo = {
+          ...user
+        };
+        //debugger;
+        // perform validation
+        let isValid = true;
+        if(e.target.name === 'email'){
+          isValid = is_valid_email(e.target.value);
+        }
+        if(e.target.name === "password"){
+          isValid = e.target.value.length > 8 && hasNumber(e.target.value);
+        }
+    
+        newUserInfo[e.target.name] = e.target.value;
+        newUserInfo.isValid = isValid;
+        setUser(newUserInfo);
+      }
+    
+      const createAccount = (event) => {
+        if(user.isValid){
+          firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+          .then(res => {
+            console.log(res);
+            const createdUser = {...user};
+            createdUser.isSignedIn = true;
+            createdUser.error = '';
+            setUser(createdUser);
+          })
+          .catch(err => {
+            console.log(err.message);
+            const createdUser = {...user};
+            createdUser.isSignedIn = false;
+            createdUser.error = err.message;
+            setUser(createdUser);
+          })
+        }
+        event.preventDefault();
+        event.target.reset();
+      } 
+    
+      const signInUser = event => {
+        if(user.isValid){
+          firebase.auth().signInWithEmailAndPassword(user.email, user.password)
+          .then(res => {
+            console.log(res);
+            const createdUser = {...user};
+            createdUser.isSignedIn = true;
+            createdUser.error = '';
+            setUser(createdUser);
+            setLoggedInUser(createdUser);
+            sessionStorage.setItem("token", createdUser.email)
+            history.replace(from);
+            // console.log(createdUser);
+            handlelogin();
+          })
+          .catch(err => {
+            console.log(err.message);
+            const createdUser = {...user};
+            createdUser.isSignedIn = false;
+            createdUser.error = err.message;
+            setUser(createdUser);
+          })
+        }
+        event.preventDefault();
+        event.target.reset();
+      }
     return (
-        <div>
-                <div className="login-body" style={{marginTop:"70px"}}>
-                
-                <div className="flex items-center justify-center min-h-screen lg:p-10 sm:p-0">
-                    <div className="bg-white p-16 rounded shadow-lg sm:w-11/12 lg:w-2/3">
-        
-                        {user.email && toggle && <p className='border-b-2 border-blue-300 font-bold mb-10 mx-auto pb-11 text-4xl text-center text-green-400 w-1/2'>Registration Successful</p>}
-        
-        
-                        <h2 className="text-3xl font-bold mb-10 text-gray-800">Please {toggle ? 'Register' : 'Login'}</h2>
-        
-                        {toggle ? <form onSubmit={userWithEmailandPassword} className="space-y-5">
-                            <div>
-                                <label htmlFor='inputName' className="block mb-1 font-bold text-gray-500">Name</label>
-                                <input onBlur={handleNameChange} id='inputName' type="text" className="w-full border-2 border-gray-200 p-3 rounded outline-none focus:border-purple-500" required />
-                            </div>
-                            <div>
-                                <label className="block mb-1 font-bold text-gray-500">Email</label>
-                                <input onBlur={email} type="email" className="w-full border-2 border-gray-200 p-3 rounded outline-none focus:border-purple-500" required />
-                            </div>
-        
-                            <div>
-                                <label className="block mb-1 font-bold text-gray-500">Password</label>
-                                <input onBlur={password} type="password" className="w-full border-2 border-gray-200 p-3 rounded outline-none focus:border-purple-500" required />
-                            </div>
-        
-        
-                            {
-                                error && <div className='italic p-0.5 text-2xl text-red-600 underline'>
-                                    <p>Email Already Exists</p>
-                                </div>
-                            }
-        
-                            <button type='submit' className="block w-full bg-yellow-400 hover:bg-yellow-300 p-4 rounded text-yellow-900 hover:text-yellow-800 transition duration-300 font-semibold"> {toggle ? 'Register' : 'Login'} </button>
-        
-        
-                        </form>
-                            :
-                            <form onSubmit={signWithEmailandPassword} className="space-y-5">
-                            
-                                <div>
-                                    <label className="block mb-1 font-bold text-gray-500">Email</label>
-                                    <input onBlur={email} type="email" className="w-full border-2 border-gray-200 p-3 rounded outline-none focus:border-purple-500" required />
-                                </div>
-        
-                                <div>
-                                    <label className="block mb-1 font-bold text-gray-500">Password</label>
-                                    <input onBlur={password} type="password" className="w-full border-2 border-gray-200 p-3 rounded outline-none focus:border-purple-500" required />
-                                </div>
-        
-        
-                                {
-                                    error && <div className='italic p-0.5 text-2xl text-red-600 underline'>
-                                        <p>Invalid Password!</p>
-                                    </div>
-                                }
-        
-                                <button type='submit' className="block w-full bg-yellow-400 hover:bg-yellow-300 p-4 rounded text-yellow-900 hover:text-yellow-800 transition duration-300 font-semibold"> {toggle ? 'Register' : 'Login'} </button>
-        
-                            </form>
-                        }
-        
-                        <div className=" flex items-center lg:pt-5 sm:pt-5">
-                            <input onClick={toggleLogin} type="checkbox" id="agree" />
-                            <label htmlFor="agree" className="ml-2 text-gray-700 text-sm cursor-pointer">Not Registered?</label>
+         <div>
+           
+         
+            <div className="logindiv w-75 p-5 mt-5">
+                    {/* {
+                        user.isSignedIn && <div>
+                        <p> Welcome, {user.name}</p>
+                        <p>Your email: {user.email}</p>
+                        <img src={user.photo} alt=""></img>
                         </div>
-                        
-                    </div>
-                </div>
-            </div>
+                    } */}
+                    <h1 style={{color: "#01ADD0"}}>Login or Sign Up</h1>
+                    <input type="checkbox" name="switchForm" onChange={switchForm} id="switchForm"/>
+                    <label htmlFor="switchForm"> Click to Sign In</label>
+                    <form style={{display:user.existingUser ? 'block': 'none'}} onSubmit={signInUser}>
+                        <input className="input-design w-50 my-2" type="text" onBlur={handleChange} name="email" placeholder="Your Email" required/>
+                        <br/>
+                        <input className="input-design w-50 my-2" type="password" onBlur={handleChange} name="password" placeholder="Your Password" required/>
+                        <br/>
+                        <input style={{backgroundColor: "#01ADD0"}} className="submitbtn btn btn-dark mt-3" type="submit" value="Sign In"/>
+                    </form>
+                    <form style={{display:user.existingUser ? 'none': 'block'}} onSubmit={createAccount}>
+                        <input className="input-design w-50 my-2" type="text" onBlur={handleChange} name="name" placeholder="Your Name" required/>
+                        <br/>
+                        <input className="input-design w-50 my-2" type="text" onBlur={handleChange} name="email" placeholder="Your Email" required/>
+                        <br/>
+                        <input className="input-design w-50 my-2" type="password" onBlur={handleChange} name="password" placeholder="Your Password (8 Characters)" required/>
+                        <br/>
+                        <input className="submitbtn" type="submit" value="Create Account"/>
+                    </form>
+                    {
+                        user.error && <p style={{color:'red'}}>{user.error}</p>
+                    }
+                    <br></br>
+                    {
+                        user.isSignedIn ? <button className="submitbtn mt-2" onClick={handleSignOut} >Sign out</button> :
+                        <button className="submitbtn mt-2" onClick={handleSignIn} >Sign in with Google</button>
+                    }
         </div>
+
+        </div> 
     );
 };
 

@@ -7,7 +7,7 @@ const TopArticles = () => {
     const [articles, setArticles]= useState([]);
 
     useEffect(() => {
-        fetch("./demoData2.json")
+        fetch("https://shielded-peak-65069.herokuapp.com/showarticles")
         .then(res=>res.json())
         .then(data=>setArticles(data))
     },[]);
@@ -26,12 +26,12 @@ const TopArticles = () => {
                                 <Card className="card-design">
                                     <Row>
                                         <Col>
-                                            <Card.Img className="w-100 mx-auto p-3" variant="top" src={article.img} />
+                                            <Card.Img className="w-100 mx-auto p-3" variant="top" src={article.imageURL} />
                                         </Col>
                                         <Col>
                                             <Card.Body>
-                                                <Card.Title>Article by <span className="fw-bolder creator-name">{article.name}</span></Card.Title>
-                                                <Card.Text>{article.article}</Card.Text>
+                                                <Card.Title>Article by <span className="fw-bolder creator-name">{article.Name}</span></Card.Title>
+                                                <Card.Text>{article.Article}</Card.Text>
                                             </Card.Body>
                                         </Col>
                                     </Row>

@@ -10,7 +10,7 @@ const WhatWeDo = () => {
                 <div className="text-center">
                     <h1 className="what-do-we-do fw-bold">What Do We Do?</h1>
                     <p>As the largest not-for-profit exclusively for 
-                        young people and social change, Procheshta’s 
+                        young people and social change, Procheshta's 
                         hundreds of members represent every Bangladesh 
                         area code and 131 countries. Using our digital 
                         platform, Procheshta members join our volunteer, 
@@ -38,7 +38,7 @@ const WhatWeDo = () => {
                         <Accordion.Item eventKey="1">
                             <Accordion.Header>We collect Donations</Accordion.Header>
                                 <Accordion.Body>
-                                The knowledge that you’re helping others is hugely empowering and, 
+                                The knowledge that you're helping others is hugely empowering and, 
                                 in turn, can make you feel happier and more fulfilled. Research has 
                                 identified a link between making a donation to charity and increased
                                  activity in the area of the brain that registers pleasure - proving 

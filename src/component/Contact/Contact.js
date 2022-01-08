@@ -9,7 +9,29 @@ import "./Contact.css";
 
 const Contact = () => {
     const { register, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+
+        const contactData = {
+            Name: data.Name,
+            Email: data.Email,
+            Message: data.Message, 
+        };
+        document.getElementById("Name").value="";
+        document.getElementById("Email").value="";
+        document.getElementById("Message").value="";
+
+
+        const url = `https://shielded-peak-65069.herokuapp.com/contact`;
+
+        fetch(url,{
+          method:"POST",
+          headers:{
+              "Content-Type":"application/json"
+          },
+          body: JSON.stringify(contactData)
+        })
+        alert("Message Sent");
+       };
 
     return (
         <div style={{backgroundColor:"#b6edf8"}}>
@@ -19,11 +41,8 @@ const Contact = () => {
                 </div>
                 <div className='text-center'>
                     <p className="py-5 page-title bg-info">
-                    Donate us. we will eat your taka. 
-                    donate us. there are goribs like shykat , tasdiq. 
-                    <br></br>They don't have jaingga to wear. shykat churi
-                     korese irish boy er jaingga. Naushad er nick name dragon pata. 
-                     gajar bepsha ase polader.<br></br> vabtasi baba o bechum. customer hocche giye tada shykat.</p>
+                    In case, you have any queries regarding our voluntary works, campaigns or donation, simply let us know.
+                    <br></br>You can contact us by email or a phone call. Or you can also send us message using the from below!<br></br> We are one click away.</p>
                 </div>
                 <div class="conact-body d-flex justify-content-center">
                     <div class="left-contact-body mx-5">
@@ -31,34 +50,35 @@ const Contact = () => {
                             <icon><img className='contact-icon mx-3' src={address} alt="address"></img></icon>
                             <div>
                                 <h3>Address</h3>
-                                <p>Lorem ipsum 302 position fuchka</p>
+                                <p>Road 6, Block B, Ashulia Model Town, Savar, Dhaka-1345, Bangladesh.</p>
                             </div>
                         </div>
                         <div className="icon-and-info my-4">
                             <icon><img className='contact-icon mx-3' src={email} alt="email"></img></icon>
                             <div>
                                 <h3>Email</h3>
-                                <p>Lorem ipsum 302 position fuchka</p>
+                                <p>procheshta.help@gmail.com</p>
                             </div>
                         </div>
                         <div className="icon-and-info my-4">
                             <icon><img className='contact-icon mx-3' src={phone} alt="phone"></img></icon>
                             <div>
                                 <h3>Phone Number</h3>
-                                <p>Lorem ipsum 302 position fuchka</p>
+                                <p>+02-9630221</p>
                             </div>
                         </div>
                     </div>
                     <div className="right-contact-body mx-5">
                     <div className='contact-form'>
+                            
                             <form className='div-design p-5' onSubmit={handleSubmit(onSubmit)}>
-                                <label for="name">Name :</label>
-                                <input className="input-design" placeholder="Enter Name" type={"text"} {...register("example", { required: true })} /><br/>
-                                <label for="email">Email :</label>
-                                <input className="input-design mb-4" placeholder="Enter Email" type={"email"} {...register("example", { required: true })} /><br/>
-                                <label className="mb-2" for="message">Message :</label> <br/>
-                                <textarea className="input-text-design mx-auto p-2 w-100" placeholder="Your Message"{...register("example", { required: true })} /><br/>
-                                <input className="mt-3 btn btn-outline-dark" type="submit" />
+                                <input className="input-design" name="Name" placeholder="Enter Name" id="Name" {...register('Name', { required: true})}/>
+                                    <br></br>
+                                <input className="input-design" name="Email" placeholder="Email" type="email" id="Email" {...register('Email', { required: true})}/>
+                                    <br></br>
+                                <textarea className="input-design" name="Message" placeholder="Your Message" id="Message" {...register('Message', { required: true})}/>
+                                    <br></br>
+                                <input className="mt-3 btn btn-outline-dark" id="submit_btn" type="submit" />
                             </form>
                         </div>
                     </div>  

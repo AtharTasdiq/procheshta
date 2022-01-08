@@ -9,7 +9,7 @@ const AboutUs = () => {
     const [team, setTeam] = useState([]);
 
     useEffect(()=>{
-       fetch('./adminData.json')
+       fetch('https://shielded-peak-65069.herokuapp.com/showadmins')
        .then(res => res.json())
        .then(data=> setTeam(data)) 
     },[])
@@ -25,17 +25,12 @@ const AboutUs = () => {
                         or even change a nation."</h2>
                 </div>
                 <div className='lower-section col-md-12'>
-                    <p>We reserve the right, at our sole discretion, 
-                        to change or modify portions of these Terms
-                        of Service at any time and without notice. 
-                        When we do this, we will post the revised Terms
-                        of Service on this page and will indicate the
-                        date of such revision.We reserve the right, at our sole discretion, 
-                        to change or modify portions of these Terms
-                        of Service at any time and without notice. 
-                        When we do this, we will post the revised Terms
-                        of Service on this page and will indicate the
-                        date of such revision.</p>
+                    <p>"Charity brings attention to the most serious issues. Because it fosters a 
+                        sense of community and purpose, most people want to help those around them.
+                         Also Charity is important because it raises awareness of issues and gives 
+                         a donor the power to do something about them. There are thousands of problem
+                          in our country that we cannot solve but there are a few that makes the difference.
+                           If we build a community to help, it will be a community for people, of people."</p>
                 </div>
             </div>
             <div className='our-team container mt-5'>
@@ -46,11 +41,11 @@ const AboutUs = () => {
                         {team.map( team => (
                             <Col nid={team.nid} >
                                 <Card className="card-design">
-                                    <Card.Img className="w-100 mx-auto p-3" variant="top" src={team.img} />
+                                    <Card.Img className="w-100 mx-auto p-3" variant="top" src={team.imageURL} />
                                     <Card.Body>
-                                    <Card.Title className="fs-2 title-design fw-bolder">{team.name}</Card.Title>
-                                    <Card.Text><span className="fw-bolder creator-name">{team.email}</span></Card.Text>
-                                    <Card.Text >Phone: <span className="fw-bolder creator-name">{team.phone}</span></Card.Text>
+                                    <Card.Title className="fs-2 title-design fw-bolder">{team.Name}</Card.Title>
+                                    <Card.Text>Email: <span className="fw-bolder creator-name">{team.Email}</span></Card.Text>
+                                    <Card.Text >Phone: <span className="fw-bolder creator-name">{team.Phone}</span></Card.Text>
                                     </Card.Body>
                                 </Card>
                             </Col>
