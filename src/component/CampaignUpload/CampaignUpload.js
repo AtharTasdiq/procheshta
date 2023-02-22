@@ -29,7 +29,7 @@ const CampaignUpload = () => {
          document.getElementById("Description").value="";
 
 
-         const url = `https://shielded-peak-65069.herokuapp.com/campaignupload`;
+         const url = `https://procheshta.onrender.com/campaignupload`;
 
          fetch(url,{
            method:"POST",

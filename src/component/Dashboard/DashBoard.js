@@ -14,25 +14,25 @@ const DashBoard = () => {
   const [campaigns, setCampaigns] = useState([]);
 
     useEffect(()=>{
-      const url = `https://shielded-peak-65069.herokuapp.com/showdonations`;
+      const url = `https://procheshta.onrender.com/showdonations`;
          fetch(url)
          .then(res => res.json())
          .then(data => setDonations(data))
       },[])
       useEffect(()=>{
-        const url = `https://shielded-peak-65069.herokuapp.com/showcampaigns`;
+        const url = `https://procheshta.onrender.com/showcampaigns`;
            fetch(url)
            .then(res => res.json())
            .then(data => setCampaigns(data))
         },[])
       useEffect(()=>{
-        const url = `https://shielded-peak-65069.herokuapp.com/showadmins`;
+        const url = `https://procheshta.onrender.com/showadmins`;
            fetch(url)
            .then(res => res.json())
            .then(data => setAdmins(data))
         },[])
         useEffect(()=>{
-          const url = `https://shielded-peak-65069.herokuapp.com/showjoinedcampaigns`;
+          const url = `https://procheshta.onrender.com/showjoinedcampaigns`;
              fetch(url)
              .then(res => res.json())
              .then(data => setJoinedCamps(data))

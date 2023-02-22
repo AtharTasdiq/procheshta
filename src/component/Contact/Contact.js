@@ -21,7 +21,7 @@ const Contact = () => {
         document.getElementById("Message").value="";
 
 
-        const url = `https://shielded-peak-65069.herokuapp.com/contact`;
+        const url = `https://procheshta.onrender.com/contact`;
 
         fetch(url,{
           method:"POST",

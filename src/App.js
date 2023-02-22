@@ -32,7 +32,7 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
   const [camps, setCamps] = useState({});
   useEffect(() => {
-    fetch("https://shielded-peak-65069.herokuapp.com/showcampaigns")
+    fetch("https://procheshta.onrender.com/showcampaigns")
     .then(res=>res.json())
     .then(data=>setCamps(data))
 },[]);

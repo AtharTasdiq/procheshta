@@ -9,7 +9,7 @@ const AboutUs = () => {
     const [team, setTeam] = useState([]);
 
     useEffect(()=>{
-       fetch('https://shielded-peak-65069.herokuapp.com/showadmins')
+       fetch('https://procheshta.onrender.com/showadmins')
        .then(res => res.json())
        .then(data=> setTeam(data)) 
     },[])

@@ -24,7 +24,7 @@ const Donation = () => {
         document.getElementById("TrxID").value="";
 
 
-        const url = `https://shielded-peak-65069.herokuapp.com/givedonation`;
+        const url = `https://procheshta.onrender.com/givedonation`;
 
         fetch(url,{
           method:"POST",

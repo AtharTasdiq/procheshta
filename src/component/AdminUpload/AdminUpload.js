@@ -25,7 +25,7 @@ const AdminUpload = () => {
          document.getElementById("NID").value="";
 
 
-         const url = `https://shielded-peak-65069.herokuapp.com/adminUpload`;
+         const url = `https://procheshta.onrender.com/adminUpload`;
 
          fetch(url,{
            method:"POST",

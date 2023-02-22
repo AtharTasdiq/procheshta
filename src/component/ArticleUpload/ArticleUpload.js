@@ -23,7 +23,7 @@ const ArticleUpload = () => {
          document.getElementById("Article").value="";
 
 
-         const url = `https://shielded-peak-65069.herokuapp.com/articleupload`;
+         const url = `https://procheshta.onrender.com/articleupload`;
 
          fetch(url,{
            method:"POST",

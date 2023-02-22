@@ -7,7 +7,7 @@ const TopArticles = () => {
     const [articles, setArticles]= useState([]);
 
     useEffect(() => {
-        fetch("https://shielded-peak-65069.herokuapp.com/showarticles")
+        fetch("https://procheshta.onrender.com/showarticles")
         .then(res=>res.json())
         .then(data=>setArticles(data))
     },[]);

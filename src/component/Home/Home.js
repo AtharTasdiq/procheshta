@@ -15,7 +15,7 @@ const Home = () => {
     // calling hooks for storing feching data
     const [campaigns, setCampaigns]= useState([]);
     useEffect(() => {
-        fetch("https://shielded-peak-65069.herokuapp.com/showcampaigns")
+        fetch("https://procheshta.onrender.com/showcampaigns")
         .then(res=>res.json())
         .then(data=>setCampaigns(data))
     },[]);

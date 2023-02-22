@@ -6,7 +6,7 @@ import "./ContactMessages.css";
 const ContactMessages = () => {
     const [messages, setMessages] = useState([]);
     useEffect(()=>{
-        const url = `https://shielded-peak-65069.herokuapp.com/showcontacts`;
+        const url = `https://procheshta.onrender.com/showcontacts`;
            fetch(url)
            .then(res => res.json())
            .then(data => setMessages(data))

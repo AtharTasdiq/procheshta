@@ -19,7 +19,7 @@ const SingleCampaign = () => {
             Email: userEmail,
         };
 
-        const url = `https://shielded-peak-65069.herokuapp.com/joinedcampaign`;
+        const url = `https://procheshta.onrender.com/joinedcampaign`;
 
         fetch(url,{
           method:"POST",
